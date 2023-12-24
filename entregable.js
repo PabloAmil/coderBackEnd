@@ -19,7 +19,7 @@ class ProductManager {
         await this.#saveProductsInfs(this.products);
       }
     }
-    return "hola";
+    return;
   }
 
   #checkDuplicatedCodes(product) {

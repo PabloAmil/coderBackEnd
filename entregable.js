@@ -53,7 +53,6 @@ class ProductManager {
     
     let product = parsedProducts.find((product) => product.id === id);
     if (product) {
-      console.log(product);
       return product;
     }
     console.log("Producto no encontrado");
@@ -89,12 +88,28 @@ class ProductManager {
       let parsedCart = JSON.parse(cart);
 
       if (parsedCart && parsedCart.length > 0) {
-        console.log(parsedCart);
+        return parsedCart;
       } else {
         console.log('El archivo está vacío o no contiene datos.');
       }
     } catch (err) {
       console.log(err);
+    }
+  }
+
+  async getXQuantityOfProducts(quantity) {
+
+    try {
+      let cart = await this.#getProductsInfs();
+      let parsedCart = JSON.parse(cart);
+      if (quantity < 0) {
+        return 'La cantidad no puede ser menor a 0';
+      }
+
+      let delimitedProducts = parsedCart.slice(0, quantity);
+      return delimitedProducts;
+    } catch (e) {
+      console.log(e);
     }
   }
 
@@ -149,27 +164,27 @@ const main = async () => {
 
   await productmanager1.addProduct(product);
 
-  await productmanager1.getProductsById(0)
+  //await productmanager1.getProductsById(0)
 
-  await productmanager1.updateProduct(0, "title", "hola")
+  // await productmanager1.updateProduct(0, "title", "hola")
 
-  await productmanager1.getProducts();
+  // await productmanager1.getProducts();
 
-  await productmanager1.deleteProduct(0);
+  // await productmanager1.deleteProduct(0);
 
-  await productmanager1.getProducts();
+  // await productmanager1.getProducts();
 
-  await productmanager1.addProduct(product3);
+  // await productmanager1.addProduct(product3);
 
-  await productmanager1.addProduct(product);
+  // await productmanager1.addProduct(product);
 
   await productmanager1.addProduct(product2);
 
-  await productmanager1.getProducts();
-
+  // await productmanager1.getProducts();
 }
 main();
 
+module.exports = productmanager1;
 
 
 

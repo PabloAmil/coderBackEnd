@@ -50,8 +50,8 @@ class ProductManager {
 
     let products = await this.#getProductsInfs();
     let parsedProducts = JSON.parse(products)
-    
     let product = parsedProducts.find((product) => product.id === id);
+
     if (product) {
       return product;
     }
@@ -84,6 +84,7 @@ class ProductManager {
 
   async getProducts() {
     try {
+
       let cart = await this.#getProductsInfs();
       let parsedCart = JSON.parse(cart);
 
@@ -97,16 +98,21 @@ class ProductManager {
     }
   }
 
-  async getXQuantityOfProducts(quantity) {
+  async getXQuantityOfProducts(limit) {
+
+    let convertedLimit = parseInt(limit);
+    if (isNaN(convertedLimit)) {
+      return 'La cantidad debe ser un numero no menor a 0';
+    }
 
     try {
       let cart = await this.#getProductsInfs();
       let parsedCart = JSON.parse(cart);
-      if (quantity < 0) {
-        return 'La cantidad no puede ser menor a 0';
+      if (convertedLimit <= 0) {
+        return 'La cantidad debe ser un numero no menor a 0';
       }
 
-      let delimitedProducts = parsedCart.slice(0, quantity);
+      let delimitedProducts = parsedCart.slice(0, convertedLimit);
       return delimitedProducts;
     } catch (e) {
       console.log(e);

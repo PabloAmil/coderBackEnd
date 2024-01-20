@@ -1,30 +1,18 @@
-const productManager = require("./entregable");
 const express = require("express");
 const app = express();
+const routerCarts = require("./routes/carts.router");
+const routerProducts = require("./routes/products.router");
 
-app.get('/productos', async (req, res) => {
+app.use(express.json());
+app.use("/api/carts", routerCarts);
+app.use("/api/products", routerProducts);
 
-  if (req.query.limit) {
-    let { limit } = req.query;
-    let products = await productManager.getXQuantityOfProducts(limit);
-    res.send(products);
-  } else {
-    let products = await productManager.getProducts();
-    res.send(products);
-  }
+
+app.get("/", (req, res) => {
+  res.status(200).send("coder house proyecto final - primera entrega");
 })
 
-app.get('/productos/:id', async (req, res) => {
-  let id = parseInt(req.params.id);
-  let product = await productManager.getProductsById(id);
-  if (product !== false) {
-    res.send(product);
-  } else {
-    res.status(404).send('Error 404: Producto no encontrado');
-  }
-})
 
-app.listen(3000, () => {
-  console.log(`escuchando el puerto 3000`);
-})
+app.listen(8080, () => console.log("now listening to port 8080"));
+
 

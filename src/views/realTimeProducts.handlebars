@@ -1,0 +1,62 @@
+<h1>Real Time Products</h1>
+
+<h3>Add product</h3>
+<div>
+  <form action="">
+    <span>product name</span>
+    <input type="text" id="productToAddTitle" placeholder="title">
+    <br>
+    <span>product price</span>
+    <input type="number" id="productToAddPrice" placeholder="price">
+    <br>
+    <span>product</span>
+    <input type="text" id="productToAddCode" placeholder="code">
+    <br>
+    <span>product</span>
+    <input type="text" id="productToAddDescription" placeholder="description">
+    <br>
+    <span>product stock</span>
+    <input type="number" id="productToAddStock" placeholder="stock">
+    <br>
+    <span>product status</span>
+    <input type="text" id="productToAddStatus" placeholder="True">
+    <br>
+    <span>product category</span>
+    <input type="text" id="productToAddCategory" placeholder="category">
+    <br>
+    <span>product thumbnails</span>
+    <input type="text" id="productToAddThumbnails" placeholder="thumbnails">
+    <br>
+    <br>
+    <button id="submitButton">Create product</button>
+  </form>
+</div>
+
+<h3>Delete product</h3>
+<form action="">
+  <input type="number" id="productToDeleteId" placeholder="Enter product ID">
+  <br>
+  <br>
+  <button id="deleteButton">Delete product</button>
+</form>
+
+<div id="productsContainer">
+  {{#each products}}
+  <h4>{{title}}</h4>
+  <p>Price: {{price}}</p>
+  <p>Decription: {{description}}</p>
+  <p>Category: {{category}}</p>
+  <p>ID: {{id}}</p>
+  <br>
+{{/each}}
+
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/realTimeProducts.js"></script>
+
+{{!-- para crear el producto lo tiene que mandar como un objeto con todos las propiedades y sus valores y llamar al metodo createNewProduct() --}}
+
+{{!-- para borrar el objeto debe utilizar el metodo delete product pasandole el id --}}
+
+{{!-- al hacer uno de los submits, lo que tendria que pasar es que el servidor recibe un evento "base actualizada" recargue y muestre la lista actualizada de productos (para todos) --}}

@@ -1,19 +1,21 @@
 const express = require('express');
 const router = express.Router();
+const productManager = require('../productManager');
 
-router.get("/", (req, res) => {
-  let user = {
-    name: 'Haru',
-    isPt: true,
-  }
+router.get("/home", async (req, res) => {
 
-  res.render("index", {
-    user
+  let products = await productManager.getProducts();
+  res.render("home", {
+    products
   });
 })
 
-router.get("/socket", (req, res)=> {
-  res.render('socket');
+router.get("/realtimeproducts", async (req, res) => {
+
+  let products = await productManager.getProducts();
+  res.render('realTimeProducts', {
+    products
+  });
 })
 
 

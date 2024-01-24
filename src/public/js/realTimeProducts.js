@@ -9,8 +9,10 @@ let productStatus = document.getElementById('productToAddStatus');
 let productCategory = document.getElementById('productToAddCategory');
 let productThumbnails = document.getElementById('productToAddThumbnails');
 let productDescription = document.getElementById('productToAddDescription');
-
 let submitButton = document.getElementById('submitButton');
+let deleteButton = document.getElementById('deleteButton');
+let productToBeDeleteId = document.getElementById('productToBeDeleteId');
+
 
 function handleSubmitButtonClick(e) {
 
@@ -28,12 +30,32 @@ function handleSubmitButtonClick(e) {
 }
 submitButton.addEventListener('click', handleSubmitButtonClick);
 
+
 realTimeProducts.on('real time products update', data => {
   console.log(data);
   const productsContainer = document.getElementById('productsContainer');
-  
-  
+  productsContainer.innerHTML = '';
+
+  data.forEach(product => {
+    const productElement = document.createElement('div');
+    productElement.innerHTML = `
+      <h4>${product.title}</h4>
+      <p>Price: ${product.price}</p>
+      <p>Description: ${product.description}</p>
+      <p>Category: ${product.category}</p>
+      <p>ID: ${product.id}</p>
+      <br>
+    `;
+    productsContainer.appendChild(productElement);
+  });
 
 })
 
+function handleDeleteButtonClick(e) {
+
+  let id = productToBeDeleteId.value
+  realTimeProducts.emit('product deleted', id)
+}
+
+deleteButton.addEventListener('click', handleDeleteButtonClick);
 

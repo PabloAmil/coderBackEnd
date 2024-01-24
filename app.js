@@ -35,6 +35,15 @@ socketServer.on('connection', socket => {
   
     socketServer.emit('real time products update', updatedCart);
   })
+
+  socket.on('product deleted', async (data) => {
+
+    let parsedData = JSON.parse(data);
+    await productManager.deleteProduct(parsedData);
+    let updatedCart = await productManager.getProducts();
+    console.log(updatedCart);
+    socketServer.emit('real time products update', updatedCart);
+  })
 })
 
 

@@ -34,7 +34,7 @@
 
 <h3>Delete product</h3>
 <form action="">
-  <input type="number" id="productToDeleteId" placeholder="Enter product ID">
+  <input type="number" id="productToBeDeleteId" placeholder="Enter product ID">
   <br>
   <br>
   <button id="deleteButton">Delete product</button>
@@ -49,14 +49,10 @@
   <p>ID: {{id}}</p>
   <br>
 {{/each}}
-
 </div>
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/realTimeProducts.js"></script>
 
-{{!-- para crear el producto lo tiene que mandar como un objeto con todos las propiedades y sus valores y llamar al metodo createNewProduct() --}}
 
-{{!-- para borrar el objeto debe utilizar el metodo delete product pasandole el id --}}
 
-{{!-- al hacer uno de los submits, lo que tendria que pasar es que el servidor recibe un evento "base actualizada" recargue y muestre la lista actualizada de productos (para todos) --}}

@@ -32,7 +32,8 @@ submitButton.addEventListener('click', handleSubmitButtonClick);
 
 
 realTimeProducts.on('real time products update', data => {
-  console.log(data);
+
+
   const productsContainer = document.getElementById('productsContainer');
   productsContainer.innerHTML = '';
 
@@ -53,7 +54,11 @@ realTimeProducts.on('real time products update', data => {
 
 function handleDeleteButtonClick(e) {
 
+  //esto funciona!
+
   let id = productToBeDeleteId.value
+  // console.log('este es el id a ver')
+  // console.log(id)
   realTimeProducts.emit('product deleted', id)
 }
 

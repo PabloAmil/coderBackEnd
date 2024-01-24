@@ -110,7 +110,7 @@ const deleteProduct = async (id) => {
     let oldProducts = await readDataBase();
     let index = oldProducts.findIndex((prod) => prod.id === id);
     oldProducts.splice(index, 1);
-    writeDataBase(oldProducts);
+    await writeDataBase(oldProducts);
   } catch (e) {
     console.log(e);
   }
